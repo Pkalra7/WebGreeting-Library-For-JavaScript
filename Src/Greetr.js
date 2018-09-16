@@ -13,16 +13,36 @@
     var supportedLangs = ['en', 'es', 'fr'];
     
     var greetings = {
-        en: 'Hello',
-        es: 'Hola',
-        fr: 'Salut'
+        
+        entryGreetings : {
+            en: 'Hello',
+            es: 'Hola',
+            fr: 'Salut'
+        
+        },
+        
+        exitGreetings : {
+            en: 'See you later',
+            es: 'Chao',
+            fr: 'Salut'
+        }
+        
         
     };
     
     var formalGreetings = {
-        en: 'Greetings',
-        es: 'Saludos',
-        fr: 'Bonjour'
+        
+        entryGreetings: {
+            en: 'Greetings',
+            es: 'Saludos',
+            fr: 'Bonjour'
+        },
+        
+        exitGreetings: {
+            en: 'Goodbye',
+            es: 'Adiós',
+            fr: 'Au revoir'
+        }
     };
     
     var logMessages = {
@@ -44,23 +64,30 @@
             }
         },
         
-        greeting: function(){
-            return greetings[this.language] + ' ' + this.firstName + '!';
+        greeting: function(direction){
+            if(direction === 'entry')
+                return greetings.entryGreetings[this.language] + ' ' + this.firstName + '!';
+            else
+                return greetings.exitGreetings[this.language] + ' ' + this.firstName + '!';
+                
         },
         
-        formalGreeting: function(){
-            return formalGreetings[this.language] + ', ' + this.fullName();
+        formalGreeting: function(direction){
+            if(direction === 'entry')
+                return formalGreetings.entryGreetings[this.language] + ', ' + this.fullName();
+            else
+                return formalGreetings.exitGreetings[this.language] + ', ' + this.fullName();
         },
         
-        greet: function(formal){
+        greet: function(formal, direction){
             var msg;
             
             //if undefined or null, will be coerced to false
             if (formal) {
-                msg = this.formalGreeting();
+                msg = this.formalGreeting(direction);
         
             }else{
-                msg = this.greeting();
+                msg = this.greeting(direction);
             }
             
             if(console){
