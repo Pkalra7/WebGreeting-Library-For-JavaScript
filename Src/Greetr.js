@@ -6,8 +6,8 @@
 /*we're going to imitate jquery's structure*/
 (function(global) {
     
-    var Greetr = function(firstName, lastName, language){
-        return new Greetr.init(firstName, lastName, language);
+    var Greetr = function(firstName, lastName, language, direction){
+        return new Greetr.init(firstName, lastName, language, direction);
     }  
   
     var supportedLangs = ['en', 'es', 'fr'];
@@ -70,8 +70,8 @@
         },
         
         //entry informal greetings 
-        greeting: function(direction){
-            if(direction === 'entry')
+        greeting: function(){
+            if(this.direction === 'entry')
                 return greetings.entryGreetings[this.language] + ' ' + this.firstName + '!';
             else
                 return greetings.exitGreetings[this.language] + ' ' + this.firstName + '!';
@@ -80,7 +80,7 @@
         
         //entry formal greetings
         formalGreeting: function(direction){
-            if(direction === 'entry')
+            if(this.direction === 'entry')
                 return formalGreetings.entryGreetings[this.language] + ', ' + this.fullName();
             else
                 return formalGreetings.exitGreetings[this.language] + ', ' + this.fullName();
@@ -122,6 +122,12 @@
             return this;
         },
         
+        setDir : function(direction){
+            this.direction = direction;
+            
+            return this;
+        },
+        
         //JQuery support
         HTMLGreeting: function(selector, formal){
             if(!$) {
@@ -146,12 +152,13 @@
     } 
         
   
-    Greetr.init = function(firstName, lastName, language){
+    Greetr.init = function(firstName, lastName, language, direction){
         
         var self = this;
         self.firstName = firstName || '' ;
         self.lastName = lastName || '' ;
         self.language = language || 'en' ;
+        self.direction = direction || 'entry';
         
     }
   
