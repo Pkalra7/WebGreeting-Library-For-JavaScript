@@ -1,18 +1,18 @@
-var g = G$('John', 'Doe');
-
-g.greet(true).setLang('es').greet(true);
 
 $('#login').click(function(){
     
     var loginGtr = G$('John', 'Doe');
     
-    loginGtr.setLang($('#lang').val());
+    loginGtr.setLang($('#lang').val()).setDir($('#direction').val());
         
     if($('input:checked').val() === "Formal"){
             loginGtr.HTMLGreeting('#greeting', true);
     }else{
-        loginGtr.HTMLGreeting('#greeting');
+        loginGtr.HTMLGreeting('#greeting', false);
     }
     
     console.log(loginGtr.log());
+    
+    
+
 });
