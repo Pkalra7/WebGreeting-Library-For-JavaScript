@@ -12,6 +12,7 @@
   
     var supportedLangs = ['en', 'es', 'fr'];
     
+    //Contains informal entry and exit greetings
     var greetings = {
         
         entryGreetings : {
@@ -30,6 +31,7 @@
         
     };
     
+    //Containts formal entry and exit greetings
     var formalGreetings = {
         
         entryGreetings: {
@@ -45,6 +47,7 @@
         }
     };
     
+    //Log messages for console
     var logMessages = {
         en: 'Logged in',
         es: 'Incio sesion',
@@ -52,18 +55,21 @@
         
     };
     
+    //
     Greetr.prototype = {
         
         fullName: function() {
             return this.firstName + ' ' + this.lastName;
         },
         
+        //checks if language is valid/available
         validate: function(){
             if (supportedLangs.indexOf(this.language) === -1) {
                 throw "Invalid language";
             }
         },
         
+        //entry informal greetings 
         greeting: function(direction){
             if(direction === 'entry')
                 return greetings.entryGreetings[this.language] + ' ' + this.firstName + '!';
@@ -72,6 +78,7 @@
                 
         },
         
+        //entry formal greetings
         formalGreeting: function(direction){
             if(direction === 'entry')
                 return formalGreetings.entryGreetings[this.language] + ', ' + this.fullName();
@@ -79,6 +86,7 @@
                 return formalGreetings.exitGreetings[this.language] + ', ' + this.fullName();
         },
         
+        //calls appropriate greeting based on formal/informal and entry/exit parameters
         greet: function(formal, direction){
             var msg;
             
@@ -114,6 +122,7 @@
             return this;
         },
         
+        //JQuery support
         HTMLGreeting: function(selector, formal){
             if(!$) {
                 throw 'jQuery not loaded1';
